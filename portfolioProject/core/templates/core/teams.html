@@ -1,0 +1,51 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Team Members{% endblock title %}
+{% block main %}
+
+
+<div class="teamContainer section">
+    <div class="info">
+        <h1>Our Team Members</h1>
+    </div>
+    <div class="row justify-content-start ">
+        {% for member in members %}
+        <div class="col-4 column">
+            <div class="post-module">
+                <div class="thumbnail">
+                    <div class="socials">
+                        <div class="social">
+                            <a href="{{member.facebook_link}}"><i class="fab fa-facebook-f"></i></a>
+                        </div>
+                        <div class="social">
+                            <a href="{{member.instagram_link}}"><i class="fab fa-instagram"></i></a>
+                        </div>
+                        <div class="social">
+                            <a href="{{member.whatsapp_link}}"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    <img src="{{member.img.url}}" />
+                </div>
+                <div class="post-content">
+                    <h1 class="title">{{member.title}}</h1>
+                    <h2 class="sub_title">{{member.subtitle}}</h2>
+                    <p class="description">{{member.describe}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock main %}
+{% block script %}
+<script>
+    $(window).on('load', function () {
+        $('.post-module').hover(function () {
+            $(this).find('.description').stop().animate({
+                height: "toggle",
+                opacity: "toggle"
+            }, 300);
+        });
+    });
+</script>
+{% endblock script %}

@@ -1,0 +1,105 @@
+{% extends 'dashboard_base.html' %}
+{% block body_block %}
+{% load crispy_forms_tags %}
+
+<div class="container bootstrap snippet">
+    <div class="row">
+  		<div class="col-sm-10"><h1>Welcome {{user.username}}</h1></div>
+    </div>
+    <div class="row">
+  		<div class="col-sm-3"><!--left col-->
+
+
+      <div class="text-center">
+
+        {% if user_profile.img %}
+        <img src="{{ user_profile.img.url }}" class="avatar img-circle img-thumbnail" alt="avatar">
+        {% else %}
+        <img src="/media/user_photos/profile_avatar.png" class="avatar img-circle img-thumbnail" alt="avatar">
+        {% endif %}
+      <h3>{{user_profile.first_name}} {{user_profile.last_name}}</h3>
+      </div><br>
+
+
+          <!-- <div class="panel panel-default">
+            <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
+            <div class="panel-body"><a href="http://bootnipets.com">bootnipets.com</a></div>
+          </div> -->
+
+
+          <ul class="list-group">
+            <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Last Login</strong></span> {{request.user.last_login}}</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Join</strong></span> {{request.user.date_joined}}</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Purchase Products</strong></span> 37</li>
+
+          </ul>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">Social Media</div>
+            <div class="panel-body">
+            	<i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
+            </div>
+          </div>
+
+        </div><!--/col-3-->
+    	<div class="col-sm-9">
+
+
+          <div class="tab-content">
+            {% if messages %}
+            {% for msg in messages %}
+            <div class="alert alert-{{msg.tags}}">
+              <span style="color:red">{{msg}}</span>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <div class="tab-pane active" id="home">
+                <hr>
+                  <form class="form" action="" enctype="multipart/form-data" method="POST" id="registrationForm">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+
+
+                      <div class="form-group">
+                           <div class="col-xs-12">
+                                <br>
+                              	<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+
+                            </div>
+                      </div>
+
+              	</form>
+
+              <hr>
+
+             </div><!--/tab-pane-->
+
+
+              </div><!--/tab-pane-->
+          </div><!--/tab-content-->
+
+        </div><!--/col-9-->
+    </div><!--/row-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to logout?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+            <a href="login.html" class="btn btn-primary">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

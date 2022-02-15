@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Our Works{% endblock title %}
+{% block main %}
+<div class="content">
+{% for w in work %}
+ <div class="row section p-4">
+        <div class="col-lg-6">
+            <img class="img-fluid" src="{{ w.image.url }}">
+        </div>
+        <div class="col-lg-6">
+            <h2>{{ w.title }}</h2>
+            <p>
+                {{ w.description }}
+            </p>
+            <a class="btn btn-warning" target="_blank" href="{{ w.demo }}">Demo</a>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+    
+
+
+{##}
+{#{% for w in work %}#}
+{#<div class="row section">#}
+{##}
+{#    <div class="sectionTitleContainer">#}
+{#        <h2 class="sectionTitle">{{w.title}}</h2>#}
+{#    </div>#}
+{#    <div class="col-md-4">#}
+{#        <div class="swiper-container worksContainer gallery">#}
+{#            <div class="swiper-wrapper">#}
+{#              {% for w in work_list %}#}
+{#                <div class="swiper-slide">#}
+{#                  <h3></h3>#}
+{#                    <div class="content">#}
+{#                        <img src="/media/{{w.img}}" alt="" class="swiper-lazy">#}
+{#                    </div>#}
+{#                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>#}
+{#                </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#            <div class="swiper-button-next"></div>#}
+{#            <div class="swiper-button-prev"></div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#</div>#}
+{##}
+{#{% endfor %}#}
+
+
+
+{% endblock main %}

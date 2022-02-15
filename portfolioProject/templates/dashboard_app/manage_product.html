@@ -1,0 +1,146 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+
+{% block body_block %}
+
+
+{% if messages %}
+{% for msg in messages %}
+<div class="alert alert-{{msg.tags}}">
+  {{msg}}
+</div>
+{% endfor %}
+{% endif %}
+<div class="row">
+
+  <!-- Datatables -->
+  <div class="col-lg-6">
+    <div class="alert alert-primary">
+      <h5>Product's</h5>
+    </div>
+    <div class="card mb-4">
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Service list</h6>
+      </div>
+      <div class="table-responsive p-3">
+        <table class="table align-items-center table-flush" id="dataTable">
+          <h4> </h4>
+          <thead class="thead-light">
+            <tr>
+              <th>S.N</th>
+              <th>Service</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in product %}
+            <tr>
+              <td>{{forloop.counter }}</td>
+              <td>{{p.product_name}}</td>
+              <td>
+                <a href="{% url 'delete_product' pk=p.id%}" class="btn btn-danger btn-sm">Delete</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="alert alert-danger">
+      <h5>Basic</h5>
+    </div>
+    {% for bp in basic_p %}
+    <label>Amount doller </label>
+    <input type="text" name="" value="{{bp.amount_doller}}" class="form-control" readonly>
+
+    <label>Amount tk </label>
+    <input type="text" name="" value="{{bp.amonut_tk}}" class="form-control" readonly>
+    <label>Disk space </label>
+      <input type="text" name="" value="{{bp.disk_space}}" class="form-control" readonly>
+    <label>Email account </label>
+      <input type="text" name="" value="{{bp.email_account}}" class="form-control" readonly>
+    <label>Bandwith</label>
+      <input type="text" name="" value="{{bp.bandwith}}" class="form-control" readonly>
+    <label>Maintenance</label>
+      <input type="text" name="" value="{{bp.maintenance}}" class="form-control" readonly>
+    <label>Subdomain Title</label>
+      <input type="text" name="" value="{{bp.subdomain}}" class="form-control" readonly>
+        <a href="{% url 'edit_basic_product_info' pk=bp.id %}" class="btn btn-info btn-bg mb-5 mt-4">Edit Info</a>
+      {% endfor %}
+  </div>
+
+  <div class="col-lg-6">
+    <div class="alert alert-danger">
+      <h5>Standerd</h5>
+    </div>
+    {% for sp in standered_p %}
+    <label>Amount doller </label>
+    <input type="text" name="" value="{{sp.amount_doller}}" class="form-control" readonly>
+
+    <label>Amount tk </label>
+    <input type="text" name="" value="{{sp.amonut_tk}}" class="form-control" readonly>
+    <label>Disk space </label>
+      <input type="text" name="" value="{{sp.disk_space}}" class="form-control" readonly>
+    <label>Email account </label>
+      <input type="text" name="" value="{{sp.email_account}}" class="form-control" readonly>
+    <label>Bandwith</label>
+      <input type="text" name="" value="{{sp.bandwith}}" class="form-control" readonly>
+    <label>Maintenance</label>
+      <input type="text" name="" value="{{sp.maintenance}}" class="form-control" readonly>
+    <label>Subdomain Title</label>
+      <input type="text" name="" value="{{sp.subdomain}}" class="form-control" readonly>
+        <a href="{% url 'edit_standered_product_info' pk=sp.id %}" class="btn btn-info btn-bg mb-5 mt-4">Edit Info</a>
+      {% endfor %}
+  </div>
+
+  <div class="col-lg-6">
+    <div class="alert alert-danger">
+      <h5>Pro</h5>
+    </div>
+    {% for pp in pro_p %}
+    <label>Amount doller </label>
+    <input type="text" name="" value="{{pp.amount_doller}}" class="form-control" readonly>
+
+    <label>Amount tk </label>
+    <input type="text" name="" value="{{pp.amonut_tk}}" class="form-control" readonly>
+    <label>Disk space </label>
+      <input type="text" name="" value="{{pp.disk_space}}" class="form-control" readonly>
+    <label>Email account </label>
+      <input type="text" name="" value="{{pp.email_account}}" class="form-control" readonly>
+    <label>Bandwith</label>
+      <input type="text" name="" value="{{pp.bandwith}}" class="form-control" readonly>
+    <label>Maintenance</label>
+      <input type="text" name="" value="{{pp.maintenance}}" class="form-control" readonly>
+    <label>Subdomain Title</label>
+      <input type="text" name="" value="{{pp.subdomain}}" class="form-control" readonly>
+        <a href="{% url 'edit_pro_product_info' pk=pp.id %}" class="btn btn-info btn-bg mb-5 mt-4">Edit Info</a>
+      {% endfor %}
+  </div>
+  <!-- DataTable with Hover -->
+
+</div>
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to logout?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+        <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

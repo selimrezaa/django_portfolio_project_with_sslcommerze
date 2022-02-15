@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Contact Us{% endblock title %}
+{% block main %}
+{% for message in messages %}
+{% if message.tags == 'success' %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong> {{ message }} !!!</strong> Thank you for messaging us.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+{% endfor %}
+<div class="contact-form">
+    <div class="contact-image">
+        <img src="{% static 'images/message.png' %}" alt="rocket_contact" />
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <h3>Drop Us a Message</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{contact_form.name}}
+                </div>
+                <div class="form-group">
+                    {{contact_form.email}}
+                </div>
+                <div class="form-group">
+                    {{contact_form.phone}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{contact_form.message}}
+                </div>
+            </div>
+            {% if form.errors %}
+            {% for field in form %}
+            {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <div class="col-12">
+                <div class="form-group">
+                    <button type="submit" name="btnSubmit" class="btnContact  float-end">Send<i
+                            class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock main %}

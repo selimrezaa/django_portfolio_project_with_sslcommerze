@@ -1,0 +1,92 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Service{% endblock title %}
+{% block main %}
+
+{% for ser in services %}
+<div class="container-fluid">
+    <div class="sectionTitleContainer">
+        <h2 class="sectionTitle">{{ ser.name }}</h2>
+    </div>
+    <div class="row gx-0">
+    {% for p in ser.package.all %}
+        <div class="col-lg-4">
+            {% if forloop.counter == 1 %}
+            <div class="pricingTable blue">
+            {% elif forloop.counter == 2 %}
+            <div class="pricingTable red">
+            {% else %}
+            <div class="pricingTable">
+            {% endif %}
+                        <div class="pricingTable-header">
+                            <h3 class="title">{{ p.name }}</h3>
+                        </div>
+                        <div class="price-value">
+                            <span class="amount">৳{{p.price}}</span>
+                            <span class="duration">per month</span>
+                        </div>
+                        <ul class="pricing-content">
+                            {% for i in p.items.all %}
+                                {% if i.status == True %}
+                                <li class="active">{{ i.name }}</li>
+                                {% else %}
+                                <li class="disable">{{ i.name }}</li>
+                                {% endif%}
+                            {% empty %}
+                            <li>No Service List</li>
+                            {% endfor %}
+                        </ul>
+                        <div class="pricingTable-signup">
+                            <a href="{{ p.demo }}">Demo</a>
+                            <a href="{% url 'checkout' ser.id p.id %}">Buy Now</a>
+                        </div>
+                    </div>
+        </div>
+        {% empty %}
+        <h3 class="text-center">There is no Package in this Services</h3>
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block script %}
+<script>
+    var swiper = new Swiper(".pricingContainer", {
+        loop: true,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+            500: {
+                slidesPerView: 1,
+            },
+            768: {
+                slidesPerView: 2,
+            },
+            1080: {
+                slidesPerView: 3,
+            }
+        }
+    });
+</script>
+{% endblock script %}
+{% endblock main %}

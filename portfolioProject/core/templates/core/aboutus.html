@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}About Us{% endblock title %}
+{% block main %}
+
+<div class="aboutus-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12 my-3">
+                <div class="aboutus">
+                    <h2 class="aboutus-title">{{obj.title1}}</h2>
+                    <p class="aboutus-text" style="white-space:pre-line;">{{obj.field1}}</p>
+                    <a class="aboutus-more" href="#">read more</a>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-6 col-xs-12 my-3">
+                <div class="feature">
+                    <div class="feature-box">
+                        <div class="clearfix">
+                            <div class="iconset">
+                                <i class="fa fa-cog icon" aria-hidden="true"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>{{obj.title2}}</h4>
+                                <p>{{obj.field2}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-box">
+                        <div class="clearfix">
+                            <div class="iconset">
+                                <i class="fa fa-cog icon" aria-hidden="true"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>{{obj.title3}}</h4>
+                                <p>{{obj.field3}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-box">
+                        <div class="clearfix">
+                            <div class="iconset">
+                                <i class="fa fa-cog icon" aria-hidden="true"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>{{obj.title4}}</h4>
+                                <p>{{obj.field4}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}

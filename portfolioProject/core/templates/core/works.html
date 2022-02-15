@@ -1,0 +1,156 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Our Works{% endblock title %}
+{% block main %}
+{% for section in sections %}
+{% if 'graphic' in section.section_name|lower%}
+<div class="row section">
+    <div class="sectionTitleContainer">
+        <h2 class="sectionTitle">Graphics Design</h2>
+    </div>
+    <div class="col-12">
+        <div class="swiper-container worksContainer gallery">
+            <div class="swiper-wrapper">
+                {% for work in section.ourworks_set.all %}
+                <div class="swiper-slide">
+                    <div class="content">
+                        <img src="{{work.img.url}}" alt="" class="swiper-lazy">
+                        <h3 hidden>{{work.title}}</h3>
+                        <p hidden>{{work.subtitle}}</p>
+                    </div>
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="row section">
+    <div class="sectionTitleContainer">
+        <h2 class="sectionTitle">{{section.section_name}}</h2>
+    </div>
+    <div class="col-12">
+        <div class="swiper-container worksContainer">
+            <div class="swiper-wrapper">
+                {% for work in section.ourworks_set.all %}
+                <div class="swiper-slide">
+                    <div class="content">
+                        <a href="{{work.link}}"><img src="{{work.img.url}}" alt="" class="swiper-lazy"></a>
+                    </div>
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+<!-- 
+<div class="row section">
+    <div class="sectionTitleContainer">
+        <h2 class="sectionTitle">Graphics Design</h2>
+    </div>
+    <div class="col-12">
+        <div class="swiper-container worksContainer gallery">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="content">
+                        <img src="https://images.unsplash.com/photo-1621569976463-2347d40c6122?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80"
+                            alt="" class="swiper-lazy">
+                    </div>
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="content">
+                        <img src="https://images.unsplash.com/photo-1621569976463-2347d40c6122?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80"
+                            alt="" class="swiper-lazy">
+                        <h3 hidden>TEST TEXT 1</h3>
+                        <p hidden>TEST P 1</p>
+                    </div>
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="content">
+                        <img src="https://images.unsplash.com/photo-1621569976463-2347d40c6122?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80"
+                            alt="" class="swiper-lazy">
+                        <h3 hidden>TEST TEXT 2</h3>
+                        <p hidden>TEST P 2</p>
+                    </div>
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="content">
+                        <img src="https://images.unsplash.com/photo-1621569976463-2347d40c6122?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80"
+                            alt="" class="swiper-lazy">
+                    </div>
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+</div> -->
+
+<div class="imgContainer">
+    <div class="fullImage">
+        <div class="image">
+            <i>&times;</i>
+            <img src="" alt="">
+        </div>
+        <div class="text">
+            <h3></h3>
+            <p></p>
+        </div>
+    </div>
+</div>
+
+{% block script %}
+<script>
+    var swiper = new Swiper(".worksContainer", {
+        lazy: true,
+        loop: true,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+            300: {
+                slidesPerView: 2,
+            },
+            768: {
+                slidesPerView: 2,
+            },
+            1080: {
+                slidesPerView: 3,
+            }
+        }
+    });
+
+    $(window).on('load', function () {
+        $('.gallery img').on('click', function () {
+            img = $(this).attr('src')
+            $('.imgContainer .fullImage img').attr('src', img)
+            $('.imgContainer .fullImage h3').html($(this).siblings('h3').text())
+            $('.imgContainer .fullImage p').html($(this).siblings('p').text())
+            $('.imgContainer').show()
+        })
+        $('.imgContainer i').on('click', function () {
+            $('.imgContainer').hide()
+        })
+    })
+    $(document).on('click', function (e) {
+        var imgContainer = $(".imgContainer");
+        if ($(e.target).closest(imgContainer).length) {
+            imgContainer.hide();
+        }
+    });
+</script>
+{% endblock script %}
+{% endblock main %}
